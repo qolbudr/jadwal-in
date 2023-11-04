@@ -34,7 +34,7 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
+                <li class="sidebar-item">
                     <a href="{{ URL::to('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
@@ -44,19 +44,24 @@
                 <li class="sidebar-title">Master Data</li>
 
                 <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ URL::to('dosen') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>Data Dosen</span>
                     </a>
 
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-building-fill"></i>
-                        <span>Data Gedung</span>
+                        <i class="bi bi-hexagon-fill"></i>
+                        <span>Data Ruangan</span>
                     </a>
 
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Data Ruangan</span>
+                        <i class="bi bi-house"></i>
+                        <span>Data Prodi</span>
+                    </a>
+
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-building-fill"></i>
+                        <span>Data Kelas</span>
                     </a>
 
                     <a href="#" class='sidebar-link'>

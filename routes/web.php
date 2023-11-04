@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DosenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,10 @@ Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+    
+    Route::get('/dosen', [DosenController::class, 'index']);
+    Route::post('/dosen/insert', [DosenController::class, 'insert']);
+    Route::get('/dosen/delete/{id}', [DosenController::class, 'delete']);
+    Route::get('/dosen/fetch/{id}', [DosenController::class, 'fetch']);
+    Route::post('/dosen/edit', [DosenController::class, 'edit']);
 });

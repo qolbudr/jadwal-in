@@ -55,6 +55,7 @@ class UserSeeder extends Seeder
             $user = new User();
             $user->name = $data[0];
             $user->nip = $data[1];
+            $user->phone = $data[2];
             $user->password = Hash::make($data[1]);
             $user->save();
         }
