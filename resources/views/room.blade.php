@@ -61,7 +61,7 @@
                                     <td>{{ $data->capacity }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <button data-id="{{ $data->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-room" class="btn btn-success me-2 btn-edit"><i class="bi bi-pencil"></i> Edit</button>
+                                            <button data-id="{{ $data->id }}" class="btn btn-success me-2 btn-edit"><i class="bi bi-pencil"></i> Edit</button>
                                             <a href="{{ URL::to('ruangan/delete/'.$data->id) }}" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</a>
                                         </div>
                                     </td>
@@ -153,16 +153,17 @@
 
 @section('page-script')
 <script>
-    const btnEdit = document.querySelectorAll('.btn-edit')
-    btnEdit.forEach((btn) => {
-        btn.addEventListener('click', async (e) => {
-            const id = e.target.getAttribute('data-id')
-            const data = await fetch(`{{ URL::to('ruangan/fetch') }}/${id}`);
-            const room = await data.json();
-            document.querySelector(`#modal-edit-room [name=id]`).value = id
-            document.querySelector(`#modal-edit-room [name=name]`).value = room.name
-            document.querySelector(`#modal-edit-room [name=capacity]`).value = room.capacity
-        })
+    document.querySelector('#table1').addEventListener("click", async (e) => {
+        const id = e.target.getAttribute('data-id')
+        const data = await fetch(`{{ URL::to('ruangan/fetch') }}/${id}`);
+        const room = await data.json();
+        document.querySelector(`#modal-edit-room [name=id]`).value = id
+        document.querySelector(`#modal-edit-room [name=name]`).value = room.name
+        document.querySelector(`#modal-edit-room [name=capacity]`).value = room.capacity
+        if(room.name) {
+            var myModal = new bootstrap.Modal(document.getElementById('modal-edit-room'))
+            myModal.show();
+        }
     })
 </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\ClassesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/prodi/delete/{id}', [ProdiController::class, 'delete']);
     Route::get('/prodi/fetch/{id}', [ProdiController::class, 'fetch']);
     Route::post('/prodi/edit', [ProdiController::class, 'edit']);
+
+    Route::get('/kelas', [ClassesController::class, 'index']);
+    Route::post('/kelas/insert', [ClassesController::class, 'insert']);
+    Route::get('/kelas/delete/{id}', [ClassesController::class, 'delete']);
+    Route::get('/kelas/fetch/{id}', [ClassesController::class, 'fetch']);
+    Route::post('/kelas/edit', [ClassesController::class, 'edit']);
 });

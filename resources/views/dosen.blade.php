@@ -63,7 +63,7 @@
                                     <td>{{ $data->phone }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <button data-id="{{ $data->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit-dosen" class="btn btn-success me-2 btn-edit"><i class="bi bi-pencil"></i> Edit</button>
+                                            <button data-id="{{ $data->id }}" class="btn btn-success me-2 btn-edit"><i class="bi bi-pencil"></i> Edit</button>
                                             <a href="{{ URL::to('dosen/delete/'.$data->id) }}" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</a>
                                         </div>
                                     </td>
@@ -163,17 +163,18 @@
 
 @section('page-script')
 <script>
-    const btnEdit = document.querySelectorAll('.btn-edit')
-    btnEdit.forEach((btn) => {
-        btn.addEventListener('click', async (e) => {
-            const id = e.target.getAttribute('data-id')
-            const data = await fetch(`{{ URL::to('dosen/fetch') }}/${id}`);
-            const dosen = await data.json();
-            document.querySelector(`#modal-edit-dosen [name=id]`).value = id
-            document.querySelector(`#modal-edit-dosen [name=name]`).value = dosen.name
-            document.querySelector(`#modal-edit-dosen [name=nip]`).value = dosen.nip
-            document.querySelector(`#modal-edit-dosen [name=phone]`).value = dosen.phone
-        })
+    document.querySelector('#table1').addEventListener("click", async (e) => {
+        const id = e.target.getAttribute('data-id')
+        const data = await fetch(`{{ URL::to('dosen/fetch') }}/${id}`);
+        const dosen = await data.json();
+        document.querySelector(`#modal-edit-dosen [name=id]`).value = id
+        document.querySelector(`#modal-edit-dosen [name=name]`).value = dosen.name
+        document.querySelector(`#modal-edit-dosen [name=nip]`).value = dosen.nip
+        document.querySelector(`#modal-edit-dosen [name=phone]`).value = dosen.phone
+        if(dosen.name) {
+            var myModal = new bootstrap.Modal(document.getElementById('modal-edit-dosen'))
+            myModal.show();
+        }
     })
 </script>
 @endsection

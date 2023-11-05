@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use App\Models\Building;
 use App\Models\Room;
+
+use Illuminate\Support\Facades\DB;
 
 class RoomSeeder extends Seeder
 {
@@ -36,13 +37,11 @@ class RoomSeeder extends Seeder
             ["A10",1,"A10.01.02",60],
             ["A10",1,"A10.01.01",70]
         ];
-
-        $building = Building::first();
+        
+        DB::table('room')->truncate();
 
         foreach($datas as $data) {
             $room = new Room();
-            $room->id_building = $building->id;
-            $room->floor = $data[1];
             $room->name = $data[2];
             $room->capacity = $data[3];
             $room->save();

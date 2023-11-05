@@ -59,7 +59,7 @@
                         <span>Data Prodi</span>
                     </a>
 
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ URL::to('kelas') }}" class='sidebar-link'>
                         <i class="bi bi-building-fill"></i>
                         <span>Data Kelas</span>
                     </a>

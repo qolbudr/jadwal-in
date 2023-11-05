@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Prodi;
 
+use Illuminate\Support\Facades\DB;
+
 class ProdiSeeder extends Seeder
 {
     /**
@@ -20,6 +22,8 @@ class ProdiSeeder extends Seeder
             "S1 Sistem Informasi",
             "S1 Pendidikan Teknologi Informasi",
         ];
+        
+        DB::table('prodi')->truncate();
         
         foreach($data as $item) {
             $prodi = new Prodi();
