@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'SIJalu - Dashboard')
+@section('title', 'SIJaru - Dashboard')
 
 @section('sidebar')
 @include('sidebar')

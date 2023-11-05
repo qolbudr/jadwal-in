@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'SIJalu - Data Prodi')
+@section('title', 'SIJaru - Data Prodi')
 
 @section('sidebar')
 @include('sidebar')

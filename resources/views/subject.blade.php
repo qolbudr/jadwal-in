@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'SIJalu - Data Mata Kuliah')
+@section('title', 'SIJaru - Data Mata Kuliah')
 
 @section('sidebar')
 @include('sidebar')

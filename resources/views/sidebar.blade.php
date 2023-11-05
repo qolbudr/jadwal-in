@@ -64,12 +64,12 @@
                         <span>Data Kelas</span>
                     </a>
 
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ URL::to('matkul') }}" class='sidebar-link'>
                         <i class="bi bi-book"></i>
                         <span>Data Matkul</span>
                     </a>
 
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ URL::to('jadwal') }}" class='sidebar-link'>
                         <i class="bi bi-calendar-fill"></i>
                         <span>Data Jadwal</span>
                     </a>

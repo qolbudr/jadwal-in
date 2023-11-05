@@ -8,6 +8,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,4 +58,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/matkul/delete/{id}', [SubjectController::class, 'delete']);
     Route::get('/matkul/fetch/{id}', [SubjectController::class, 'fetch']);
     Route::post('/matkul/edit', [SubjectController::class, 'edit']);
+
+    Route::get('/jadwal', [ScheduleController::class, 'index']);
+    Route::post('/jadwal/insert', [ScheduleController::class, 'insert']);
+    Route::get('/jadwal/delete/{id}', [ScheduleController::class, 'delete']);
+    Route::get('/jadwal/fetch/{id}', [ScheduleController::class, 'fetch']);
+    Route::post('/jadwal/edit', [ScheduleController::class, 'edit']);
 });
