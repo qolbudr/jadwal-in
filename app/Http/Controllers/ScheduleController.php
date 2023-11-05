@@ -14,6 +14,7 @@ use App\Models\Room;
 
 use App\Models\User;
 
+use Illuminate\Support\Facades\Auth;
 
 use Session;
 
@@ -30,7 +31,12 @@ class ScheduleController extends Controller
     }
 
     public function index() {
-        $data['schedule'] = Schedule::getParsed();
+        if(Auth::user()->nip == '2201006136') {
+            $data['schedule'] = Schedule::getParsed();
+        } else {
+            $data['schedule'] = Schedule::getParsedByUserId(Auth::user()->id);            
+        }
+
         $data['subject'] = Subject::all();
         $data['classes'] = Classes::getAllWithProdi();
         $data['room'] = Room::all();

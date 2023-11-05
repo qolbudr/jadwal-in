@@ -38,9 +38,11 @@
                         <h5 class="card-title">
                             Data Kelas
                         </h5>
+                        @if(Auth::user()->nip == '2201006136')
                         <h5 class="card-title">
                             <button data-bs-toggle="modal" data-bs-target="#modal-add-class" class="btn btn-primary">Tambah Data</button>
                         </h5>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -50,7 +52,9 @@
                                 <th>No</th>
                                 <th>Prodi</th>
                                 <th>Nama Kelas</th>
+                                @if(Auth::user()->nip == '2201006136')
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -59,12 +63,14 @@
                                     <td>{{ $k + 1 }}</td>
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->class_name }}</td>
+                                    @if(Auth::user()->nip == '2201006136')
                                     <td>
                                         <div class="d-flex">
                                             <button data-id="{{ $data->class_id }}" class="btn btn-success me-2 btn-edit"><i class="bi bi-pencil"></i> Edit</button>
                                             <a href="{{ URL::to('kelas/delete/'.$data->class_id) }}" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</a>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
