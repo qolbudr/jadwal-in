@@ -49,7 +49,7 @@
                         <span>Data Dosen</span>
                     </a>
 
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ URL::to('ruangan') }}" class='sidebar-link'>
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Data Ruangan</span>
                     </a>

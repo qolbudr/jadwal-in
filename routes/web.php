@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dosen/delete/{id}', [DosenController::class, 'delete']);
     Route::get('/dosen/fetch/{id}', [DosenController::class, 'fetch']);
     Route::post('/dosen/edit', [DosenController::class, 'edit']);
+    
+    Route::get('/ruangan', [RoomController::class, 'index']);
+    Route::post('/ruangan/insert', [RoomController::class, 'insert']);
+    Route::get('/ruangan/delete/{id}', [RoomController::class, 'delete']);
+    Route::get('/ruangan/fetch/{id}', [RoomController::class, 'fetch']);
+    Route::post('/ruangan/edit', [RoomController::class, 'edit']);
 });
