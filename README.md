@@ -41,4 +41,4 @@ php artisan serve
 
 ## Screenshot
 
-[Screenshot](screenshot.png)
+<img src="./screenshots.png" width="100%" />
