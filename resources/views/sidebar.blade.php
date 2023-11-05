@@ -54,7 +54,7 @@
                         <span>Data Ruangan</span>
                     </a>
 
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ URL::to('prodi') }}" class='sidebar-link'>
                         <i class="bi bi-house"></i>
                         <span>Data Prodi</span>
                     </a>
