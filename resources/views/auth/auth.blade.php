@@ -26,6 +26,8 @@
         })
     </script>
     @endif
+
+    <script type="module" src="{{ asset('assets/static/js/firebase.js') }}"></script>
 </body>
 
 </html>
