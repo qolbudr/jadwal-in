@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Room;
+use App\Models\Schedule;
 
 class DashboardController extends Controller
 {
@@ -23,7 +24,9 @@ class DashboardController extends Controller
         $data = [
             'userCount' => User::count(),
             'roomCount' => Room::count(),
+            'schedule' => Schedule::getTodayParsed(),
         ];
+
         return view('dashboard', $data);
     }
 }

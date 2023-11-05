@@ -34,7 +34,7 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item {{ strpos(Request::url(), 'dashboard') ? 'active' : '' }}">
                     <a href="{{ URL::to('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
@@ -43,32 +43,42 @@
 
                 <li class="sidebar-title">Master Data</li>
 
-                <li class="sidebar-item">
+                <li class="sidebar-item {{ strpos(Request::url(), 'dosen') ? 'active' : '' }}">
                     <a href="{{ URL::to('dosen') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>Data Dosen</span>
                     </a>
-
+                </li>
+                
+                <li class="sidebar-item {{ strpos(Request::url(), 'ruangan') ? 'active' : '' }}">
                     <a href="{{ URL::to('ruangan') }}" class='sidebar-link'>
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Data Ruangan</span>
                     </a>
-
+                </li>
+                
+                <li class="sidebar-item {{ strpos(Request::url(), 'prodi') ? 'active' : '' }}">
                     <a href="{{ URL::to('prodi') }}" class='sidebar-link'>
                         <i class="bi bi-house"></i>
                         <span>Data Prodi</span>
                     </a>
+                </li>
 
+                <li class="sidebar-item {{ strpos(Request::url(), 'kelas') ? 'active' : '' }}">
                     <a href="{{ URL::to('kelas') }}" class='sidebar-link'>
                         <i class="bi bi-building-fill"></i>
                         <span>Data Kelas</span>
                     </a>
+                </li>
 
+                <li class="sidebar-item {{ strpos(Request::url(), 'matkul') ? 'active' : '' }}">
                     <a href="{{ URL::to('matkul') }}" class='sidebar-link'>
                         <i class="bi bi-book"></i>
                         <span>Data Matkul</span>
                     </a>
+                </li>
 
+                <li class="sidebar-item {{ strpos(Request::url(), 'jadwal') ? 'active' : '' }}">
                     <a href="{{ URL::to('jadwal') }}" class='sidebar-link'>
                         <i class="bi bi-calendar-fill"></i>
                         <span>Data Jadwal</span>

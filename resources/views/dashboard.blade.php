@@ -7,6 +7,13 @@
 @endsection
 
 @section('content')
+<style>
+@keyframes marquee {
+    0%   { top:   50em }
+    100% { top:  -40em }
+}
+</style>
+
 <div id="main">
     <header class="mb-3">
         <a href="#" class="burger-btn d-block d-xl-none">
@@ -77,12 +84,29 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="card" style="height: 67vh;">
+                        <div class="card" unstyle="height: 67vh;">
                             <div class="card-header">
                                 <h4>Jadwal Hari Ini</h4>
                             </div>
-                            <div class="card-body">
-                                
+                            <div class="card-body" unstyle="position: relative; overflow:hidden">
+                                <div class="row" unstyle="top: 5em; position: relative; box-sizing: border-box; animation: marquee 25s linear infinite;">
+                                    @if(count($schedule) != 0)
+                                        @foreach($schedule as $item)
+                                        <div class="col-sm-6 col-md-4 col-lg-3">
+                                            <div class="alert {{  $item->begin < date('H:i:s') && date('H:i:s') < $item->end ? 'alert-success' : 'alert-secondary' }}">
+                                                <h3>{{ $item->room_name }}</h3>
+                                                <h5>{{ $item->subject_name }}</h5>
+                                                <h5 class="my-2" style="font-weight: normal">{{ $item->begin }} - {{ $item->end }}</h5>
+                                                <h5 class="mt-2" style="font-weight: normal">{{ $item->user_name }}</h5>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    @else
+                                        <div class="w-100 d-flex align-items-center justify-content-center" style="height: 60vh">
+                                            <h5>Belum ada jadwal hari ini</h5>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
