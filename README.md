@@ -41,4 +41,4 @@ php artisan serve
 
 ## Screenshot
 
-[Screenshot](screenshot.png)
+<img src="https://raw.githubusercontent.com/qolbudr/jadwal-in/master/screenshot.png" width="100%" />
