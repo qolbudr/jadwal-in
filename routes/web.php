@@ -28,6 +28,8 @@ Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/jadwal/get', [DashboardController::class, 'getSchedule']);
+    Route::get('/ruangan/get', [DashboardController::class, 'getRoom']);
     
     Route::get('/dosen', [DosenController::class, 'index']);
     Route::post('/dosen/insert', [DosenController::class, 'insert']);

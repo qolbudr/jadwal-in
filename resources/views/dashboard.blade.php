@@ -8,10 +8,15 @@
 
 @section('content')
 <style>
-@keyframes marquee {
-    0%   { top:   50em }
-    100% { top:  -40em }
-}
+    @keyframes marquee {
+        0% {
+            top: 50em
+        }
+
+        100% {
+            top: -40em
+        }
+    }
 </style>
 
 <div id="main">
@@ -87,25 +92,20 @@
                         <div class="card" unstyle="height: 67vh;">
                             <div class="card-header">
                                 <h4>Jadwal Hari Ini</h4>
+                                <div class="box-filter row">
+                                    <div class="form-group col-12 col-md-4">
+                                        <label class="mb-2">Pilih Gedung</label>
+                                        <select class="form-control" onchange="getSchedule()" name="building" required>
+                                            @foreach($allBuilding as $building)
+                                            <option value="{{ $building }}">{{ $building }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body" unstyle="position: relative; overflow:hidden">
-                                <div class="row" unstyle="top: 5em; position: relative; box-sizing: border-box; animation: marquee 25s linear infinite;">
-                                    @if(count($schedule) != 0)
-                                        @foreach($schedule as $item)
-                                        <div class="col-sm-6 col-md-4 col-lg-3">
-                                            <div class="alert {{  $item->begin < date('H:i:s') && date('H:i:s') < $item->end ? 'alert-success' : 'alert-secondary' }}">
-                                                <h3>{{ $item->room_name }}</h3>
-                                                <h5>{{ $item->subject_name }}</h5>
-                                                <h5 class="my-2" style="font-weight: normal">{{ $item->begin }} - {{ $item->end }}</h5>
-                                                <h5 class="mt-2" style="font-weight: normal">{{ $item->user_name }}</h5>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    @else
-                                        <div class="w-100 d-flex align-items-center justify-content-center" style="height: 60vh">
-                                            <h5>Belum ada jadwal hari ini</h5>
-                                        </div>
-                                    @endif
+                                <div id="schedule-place" class="row" unstyle="top: 5em; position: relative; box-sizing: border-box; animation: marquee 25s linear infinite;">
+
                                 </div>
                             </div>
                         </div>
@@ -115,4 +115,75 @@
         </section>
     </div>
 </div>
+@endsection
+
+@section('page-script')
+<script>
+    const baseURL = `{{ URL::to('') }}`
+
+    const getSchedule = async () => {
+        const building = document.querySelector('[name=building]').value
+        const dataRoom = await fetch(`${baseURL}/ruangan/get?gedung=${building}`)
+        const dataSchedule = await fetch(`${baseURL}/jadwal/get?gedung=${building}`)
+
+        let responseRoom = await dataRoom.json()
+        let responseSchedule = await dataSchedule.json()
+
+        const finalResponse = [];
+
+        responseRoom.forEach((room) => {
+            responseSchedule.forEach((schedule) => {
+                if (room.name == schedule.room_name) {
+                    finalResponse.push(schedule)
+                }
+            })
+        })
+
+        responseRoom.forEach((room) => {
+            responseSchedule.forEach((schedule) => {
+                if (finalResponse.filter((item) => item.room_name == room.name).length == 0) {
+                    finalResponse.push({
+                        room_name: room.name
+                    })
+                }
+            })
+        })
+
+        const sortedArray = finalResponse.sort((a, b) => a.room_name.localeCompare(b.room_name))
+
+        let html = ``
+
+        if (sortedArray.length > 0) {
+            sortedArray.forEach((item) => {
+                html += `
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="alert ${item.subject_name == null ? 'alert-info' : Date.parse(item.begin) < Date.now() && Date.now() < Date.parse(item.end) ? 'alert-success' : 'alert-secondary'}">
+                        <h3>${item.room_name}</h3>
+                        ${ item.subject_name == null ?  
+                            `<h5>Ruangan hari ini kosong</h5>
+                            <h5 class="my-2" style="font-weight: normal">&nbsp;</h5>
+                            <h5 class="mt-2" style="font-weight: normal">&nbsp;</h5>
+                            ` :
+                            `<h5>${item.subject_name}</h5>
+                            <h5 class="my-2" style="font-weight: normal">${item.begin} - ${item.end}</h5>
+                            <h5 class="mt-2" style="font-weight: normal">${item.user_name}</h5>
+                            `
+                        }
+                    </div>
+                </div>
+            `
+            })
+        } else {
+            html += `
+            <div class="w-100 d-flex align-items-center justify-content-center" style="height: 60vh">
+                <h5>Belum ada jadwal hari ini</h5>
+            </div>
+            `
+        }
+
+        document.querySelector('#schedule-place').innerHTML = html;
+    }
+
+    getSchedule();
+</script>
 @endsection

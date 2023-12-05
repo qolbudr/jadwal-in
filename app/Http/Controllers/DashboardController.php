@@ -21,12 +21,33 @@ class DashboardController extends Controller
     }
 
     public function dashboard() {
+        $building = [];
+        $allRoom = Room::all();
+
+        foreach($allRoom as $room) {
+            array_push($building, substr($room->name, 0, 3));
+        } 
+
+        $parsedBuilding = array_unique($building);
+
         $data = [
             'userCount' => User::count(),
             'roomCount' => Room::count(),
-            'schedule' => Schedule::getTodayParsed(),
+            'allBuilding' => $parsedBuilding,
         ];
 
         return view('dashboard', $data);
+    }
+
+    public function getSchedule() {
+        $building = $_GET['gedung'];
+        $response = Schedule::getTodayParsedWithBuilding($building);
+        return response()->json($response);
+    }
+
+    public function getRoom() {
+        $building = $_GET['gedung'];
+        $response = Room::where('name', 'like', '%'.$building.'%')->get();
+        return response()->json($response);
     }
 }
