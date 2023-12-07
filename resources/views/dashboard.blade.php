@@ -137,6 +137,10 @@
                     finalResponse.push(schedule)
                 }
             })
+
+            finalResponse.push({
+                room_name: room.name,
+            })
         })
 
         responseRoom.forEach((room) => {
@@ -155,9 +159,10 @@
 
         if (sortedArray.length > 0) {
             sortedArray.forEach((item) => {
+                now = new Date().toLocaleTimeString()
                 html += `
                 <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="alert ${item.subject_name == null ? 'alert-info' : Date.parse(item.begin) < Date.now() && Date.now() < Date.parse(item.end) ? 'alert-success' : 'alert-secondary'}">
+                    <div class="alert ${item.subject_name == null ? 'alert-info' : item.begin <= now && now <= item.end ? 'alert-success' : 'alert-secondary'}">
                         <h3>${item.room_name}</h3>
                         ${ item.subject_name == null ?  
                             `<h5>Ruangan hari ini kosong</h5>
