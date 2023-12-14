@@ -159,10 +159,15 @@
 
         if (sortedArray.length > 0) {
             sortedArray.forEach((item) => {
-                now = new Date().toLocaleTimeString()
+                const now = new Date()
+                const nowTime = now.toTimeString().split(' ')[0]
+                const nowDate = new Date('01/01/1999 ' + nowTime)
+                const begin = new Date('01/01/1999 ' + item.begin)
+                const end = new Date('01/01/1999 ' + item.end)
+
                 html += `
                 <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="alert ${item.subject_name == null ? 'alert-info' : item.begin <= now && now <= item.end ? 'alert-success' : 'alert-secondary'}">
+                    <div class="alert ${item.subject_name == null ? 'alert-info' : begin <= nowDate && nowDate <= end ? 'alert-success' : 'alert-secondary'}">
                         <h3>${item.room_name}</h3>
                         ${ item.subject_name == null ?  
                             `<h5>Ruangan hari ini kosong</h5>

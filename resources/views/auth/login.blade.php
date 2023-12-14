@@ -36,9 +36,7 @@
             </div>
         </div>
         <div class="col-lg-7 d-none d-lg-block">
-            <div id="auth-right">
-
-            </div>
+            <img src="{{ asset('Fakultas Teknik 2.png') }}" class="w-100 h-100" style="object-fit:cover">
         </div>
     </div>
 </div>
