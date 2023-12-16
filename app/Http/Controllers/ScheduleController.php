@@ -30,6 +30,12 @@ class ScheduleController extends Controller
         return redirect()->back();
     }
 
+    public function showError($message) {
+        Session::flash('error', $message);
+
+        return redirect()->back();
+    }
+
     public function index() {
         if(Auth::user()->nip == '2201006136') {
             $data['schedule'] = Schedule::getParsed();
@@ -45,6 +51,20 @@ class ScheduleController extends Controller
     }
 
     public function insert(Request $request) {
+        $found = Schedule::where('id_room', $id->room)->get();
+        
+        foreach($found as $foundSchedule) {
+            $beginForm = strtotime($request->begin);
+            $endForm = strtotime($request->end);
+
+            $beginDatabase = strtotime($foundSchedule->begin);
+            $endDatabase = strtotime($foundSchedule->end);
+
+            if($beginForm >= $beginDatabase && $endForm <= $endDatabase) {
+                return $this->showError('Runagan ini telah digunakan silahkan pilih hari atau jam lainnya');
+            }
+        }
+
         $schedule = new Schedule();
         $schedule->id_room = $request->id_room;
         $schedule->id_user = $request->id_user;
@@ -73,6 +93,20 @@ class ScheduleController extends Controller
     }
 
     public function edit(Request $request) {
+        $found = Schedule::where('id_room', $id->room)->get();
+        
+        foreach($found as $foundSchedule) {
+            $beginForm = strtotime($request->begin);
+            $endForm = strtotime($request->end);
+
+            $beginDatabase = strtotime($foundSchedule->begin);
+            $endDatabase = strtotime($foundSchedule->end);
+
+            if($beginForm >= $beginDatabase && $endForm <= $endDatabase) {
+                return $this->showError('Runagan ini telah digunakan silahkan pilih hari atau jam lainnya');
+            }
+        }
+
         $schedule = Schedule::find($request->id);
         $schedule->id_room = $request->id_room;
         $schedule->id_user = $request->id_user;
