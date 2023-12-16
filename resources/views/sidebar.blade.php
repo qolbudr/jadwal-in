@@ -81,7 +81,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ strpos(Request::url(), 'jadwal') ? 'active' : '' }}">
+                <li class="sidebar-item {{ strpos(Request::url(), '/jadwal') ? 'active' : '' }}">
                     <a href="{{ URL::to('jadwal') }}" class='sidebar-link'>
                         <i class="bi bi-calendar-fill"></i>
                         <span>Data Jadwal</span>
