@@ -37,7 +37,7 @@ class DosenController extends Controller
             $result = $user->save();
 
             return $this->showMessage($result);
-        } catch (e) {
+        } catch (Exception $e) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
         }
     }
@@ -65,7 +65,7 @@ class DosenController extends Controller
             $result = $user->save();
 
             return $this->showMessage($result);
-        } catch (e) {
+        } catch (Exception $e) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
         }
     }
