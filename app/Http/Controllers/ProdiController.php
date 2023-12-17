@@ -53,9 +53,9 @@ class ProdiController extends Controller
     }
 
     public function edit(Request $request) {
-        $found = Prodi::where('name', $request->name)->count();
+        $found = Prodi::where('name', $request->name)->get();
 
-        if($found > 0) {
+        if(count($found) > 0) {
             if($found[0]->id != $request->id) {
                 return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
             }

@@ -57,9 +57,9 @@ class ClassesController extends Controller
     }
 
     public function edit(Request $request) {
-        $found = Classes::where('name', $request->name)->where('id_prodi', $request->id_prodi)->count();
+        $found = Classes::where('name', $request->name)->where('id_prodi', $request->id_prodi)->get();
 
-        if($found > 0) {
+        if(count($found) > 0) {
             if($found[0]->id != $request->id) {
                 return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
             }

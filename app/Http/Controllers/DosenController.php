@@ -58,9 +58,9 @@ class DosenController extends Controller
     }
 
     public function edit(Request $request) {
-        $found = User::where('name', $request->name)->orWhere('nip', $request->nip)->count();
+        $found = User::where('name', $request->name)->orWhere('nip', $request->nip)->get();
 
-        if($found > 0) {
+        if(count($found) > 0) {
             if($found[0]->id != $request->id) {
                 return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
             }
