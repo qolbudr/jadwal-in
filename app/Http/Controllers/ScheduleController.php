@@ -51,7 +51,7 @@ class ScheduleController extends Controller
     }
 
     public function insert(Request $request) {
-        $found = Schedule::where('id_room', $request->id_room)->get();
+        $found = Schedule::where('id_room', $request->id_room)->where('day', $request->day)->get();
         
         foreach($found as $foundSchedule) {
             $beginForm = strtotime($request->begin);
@@ -93,7 +93,7 @@ class ScheduleController extends Controller
     }
 
     public function edit(Request $request) {
-        $found = Schedule::where('id_room', $request->id_room)->get();
+        $found = Schedule::where('id_room', $request->id_room)->where('day', $request->day)->get();
         
         foreach($found as $foundSchedule) {
             $beginForm = strtotime($request->begin);
