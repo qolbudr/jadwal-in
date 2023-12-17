@@ -103,7 +103,9 @@ class ScheduleController extends Controller
             $endDatabase = strtotime($foundSchedule->end);
 
             if($beginForm >= $beginDatabase && $endForm <= $endDatabase) {
-                return $this->showError('Runagan ini telah digunakan silahkan pilih hari atau jam lainnya');
+                if($foundSchedule->id != $request->id) {
+                    return $this->showError('Runagan ini telah digunakan silahkan pilih hari atau jam lainnya');
+                }
             }
         }
 

@@ -60,7 +60,9 @@ class ClassesController extends Controller
         $found = Classes::where('name', $request->name)->where('id_prodi', $request->id_prodi)->count();
 
         if($found > 0) {
-            return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+            if($found[0]->id != $request->id) {
+                return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+            }
         }
         
         $class = Classes::find($request->id);

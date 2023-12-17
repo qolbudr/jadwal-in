@@ -57,7 +57,9 @@ class RoomController extends Controller
         $found = Room::where('name', $request->name)->count();
 
         if($found > 0) {
-            return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+            if($found[0]->id != $request->id) {
+                return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+            }
         }
         
         $room = Room::find($request->id);

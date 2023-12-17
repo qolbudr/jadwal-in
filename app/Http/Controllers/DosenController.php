@@ -61,7 +61,9 @@ class DosenController extends Controller
         $found = User::where('name', $request->name)->orWhere('nip', $request->nip)->count();
 
         if($found > 0) {
-            return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+            if($found[0]->id != $request->id) {
+                return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+            }
         }
 
         $user = User::find($request->id);
