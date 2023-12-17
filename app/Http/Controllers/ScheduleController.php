@@ -24,7 +24,7 @@ class ScheduleController extends Controller
         if($result) {
             Session::flash('success', 'Berhasil melakukan perintah');
         } else {
-            Session::flash('success', 'Terjadi kesalahan');
+            Session::flash('error', 'Terjadi kesalahan');
         }
 
         return redirect()->back();

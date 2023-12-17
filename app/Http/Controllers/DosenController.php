@@ -16,7 +16,7 @@ class DosenController extends Controller
         if($result) {
             Session::flash('success', $message == null ? 'Berhasil melakukan perintah' : $message);
         } else {
-            Session::flash('success', $message == null ? 'Terjadi kesalahan' : $message);
+            Session::flash('error', $message == null ? 'Terjadi kesalahan' : $message);
         }
 
         return redirect()->back();
@@ -28,18 +28,20 @@ class DosenController extends Controller
     }
 
     public function insert(Request $request) {
-        try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->nip = $request->nip;
-            $user->password = Hash::make($request->nip);
-            $user->phone = $request->phone;
-            $result = $user->save();
+        $found = Classes::where('name', $request->name)->orWhere('nip', $request->nip)->count();
 
-            return $this->showMessage($result);
-        } catch (Exception $e) {
+        if($found > 0) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
         }
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->nip = $request->nip;
+        $user->password = Hash::make($request->nip);
+        $user->phone = $request->phone;
+        $result = $user->save();
+
+        return $this->showMessage($result);
     }
 
     public function delete($id) {
@@ -56,17 +58,19 @@ class DosenController extends Controller
     }
 
     public function edit(Request $request) {
-        try {
-            $user = User::find($request->id);
-            $user->name = $request->name;
-            $user->nip = $request->nip;
-            $user->password = Hash::make($request->nip);
-            $user->phone = $request->phone;
-            $result = $user->save();
+        $found = Classes::where('name', $request->name)->orWhere('nip', $request->nip)->count();
 
-            return $this->showMessage($result);
-        } catch (Exception $e) {
+        if($found > 0) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
         }
+        
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->nip = $request->nip;
+        $user->password = Hash::make($request->nip);
+        $user->phone = $request->phone;
+        $result = $user->save();
+
+        return $this->showMessage($result);
     }
 }

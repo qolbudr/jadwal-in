@@ -16,7 +16,7 @@ class ClassesController extends Controller
         if($result) {
             Session::flash('success', $message == null ? 'Berhasil melakukan perintah' : $message);
         } else {
-            Session::flash('success', $message == null ? 'Terjadi kesalahan' : $message);
+            Session::flash('error', $message == null ? 'Terjadi kesalahan' : $message);
         }
 
         return redirect()->back();
