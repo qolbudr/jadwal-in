@@ -10,11 +10,11 @@ use Session;
 
 class ProdiController extends Controller
 {
-    public function showMessage($result) {
+    public function showMessage($result, $message = null) {
         if($result) {
-            Session::flash('success', 'Berhasil melakukan perintah');
+            Session::flash('success', $message == null ? 'Berhasil melakukan perintah' : $message);
         } else {
-            Session::flash('success', 'Terjadi kesalahan');
+            Session::flash('success', $message == null ? 'Terjadi kesalahan' : $message);
         }
 
         return redirect()->back();
@@ -26,6 +26,12 @@ class ProdiController extends Controller
     }
 
     public function insert(Request $request) {
+        $found = Prodi::where('name', $request->name)->count();
+
+        if($found > 0) {
+            return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+        }
+
         $prodi = new Prodi();
         $prodi->name = $request->name;
         $result = $prodi->save();
@@ -47,6 +53,12 @@ class ProdiController extends Controller
     }
 
     public function edit(Request $request) {
+        $found = Prodi::where('name', $request->name)->count();
+
+        if($found > 0) {
+            return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
+        }
+
         $prodi = Prodi::find($request->id);
         $prodi->name = $request->name;
         $result = $prodi->save();
