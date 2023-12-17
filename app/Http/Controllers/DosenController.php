@@ -28,7 +28,7 @@ class DosenController extends Controller
     }
 
     public function insert(Request $request) {
-        $found = Classes::where('name', $request->name)->orWhere('nip', $request->nip)->count();
+        $found = User::where('name', $request->name)->orWhere('nip', $request->nip)->count();
 
         if($found > 0) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
@@ -58,12 +58,12 @@ class DosenController extends Controller
     }
 
     public function edit(Request $request) {
-        $found = Classes::where('name', $request->name)->orWhere('nip', $request->nip)->count();
+        $found = User::where('name', $request->name)->orWhere('nip', $request->nip)->count();
 
         if($found > 0) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
         }
-        
+
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->nip = $request->nip;
