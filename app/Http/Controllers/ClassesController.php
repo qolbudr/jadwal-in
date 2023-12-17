@@ -29,7 +29,7 @@ class ClassesController extends Controller
     }
 
     public function insert(Request $request) {
-        $found = Classes::where('name', $request->name)->count();
+        $found = Classes::where('name', $request->name)->where('id_prodi', $request->id_prodi)->count();
 
         if($found > 0) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
@@ -57,7 +57,7 @@ class ClassesController extends Controller
     }
 
     public function edit(Request $request) {
-        $found = Classes::where('name', $request->name)->count();
+        $found = Classes::where('name', $request->name)->where('id_prodi', $request->id_prodi)->count();
 
         if($found > 0) {
             return $this->showMessage(false, 'Terjadi kesalahan data yang anda inputkan telah ada');
