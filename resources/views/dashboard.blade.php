@@ -137,10 +137,6 @@
                     finalResponse.push(schedule)
                 }
             })
-
-            finalResponse.push({
-                room_name: room.name,
-            })
         })
 
         responseRoom.forEach((room) => {
