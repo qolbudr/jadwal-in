@@ -140,13 +140,11 @@
         })
 
         responseRoom.forEach((room) => {
-            responseSchedule.forEach((schedule) => {
-                if (finalResponse.filter((item) => item.room_name == room.name).length == 0) {
-                    finalResponse.push({
-                        room_name: room.name
-                    })
-                }
-            })
+            if (finalResponse.filter((item) => item.room_name == room.name).length == 0) {
+                finalResponse.push({
+                    room_name: room.name
+                })
+            }
         })
 
         const sortedArray = finalResponse.sort((a, b) => a.room_name.localeCompare(b.room_name))
