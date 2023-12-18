@@ -151,6 +151,7 @@
                         <label>Peserta</label>
                         <input class="form-control" placeholder="Masukkan jumlah peserta" type="number" name="student" required>
                     </div>
+                    @if(Auth::user()->nip == '2201006136')
                     <div class="form-group">
                         <label>Dosen</label>
                         <select name="id_user" class="form-control" placeholder="Masukkan dosen" required>
@@ -159,6 +160,9 @@
                             @endforeach
                         </select>
                     </div>
+                    @else
+                    <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary"
@@ -241,6 +245,7 @@
                         <label>Peserta</label>
                         <input class="form-control" placeholder="Masukkan jumlah peserta" type="number" name="student" required>
                     </div>
+                    @if(Auth::user()->nip == '2201006136')
                     <div class="form-group">
                         <label>Dosen</label>
                         <select name="id_user" class="form-control" placeholder="Masukkan dosen" required>
@@ -249,6 +254,9 @@
                             @endforeach
                         </select>
                     </div>
+                    @else
+                    <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary"
