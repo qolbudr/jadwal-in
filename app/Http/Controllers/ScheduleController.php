@@ -74,6 +74,7 @@ class ScheduleController extends Controller
         $schedule->begin = $request->begin;
         $schedule->end = $request->end;
         $schedule->student = $request->student;
+        $schedule->active = $request->active == "on" ? true : false;
         $result = $schedule->save();
 
         return $this->showMessage($result);
@@ -103,8 +104,8 @@ class ScheduleController extends Controller
             $endDatabase = strtotime($foundSchedule->end);
 
             if($beginForm >= $beginDatabase && $endForm <= $endDatabase) {
-                if($foundSchedule->id != $request->id) {
-                    return $this->showError('Runagan ini telah digunakan silahkan pilih hari atau jam lainnya');
+                if($foundSchedule->id_room != $request->id_room) {
+                    return $this->showError('Ruangan ini telah digunakan silahkan pilih hari atau jam lainnya');
                 }
             }
         }
@@ -118,6 +119,7 @@ class ScheduleController extends Controller
         $schedule->begin = $request->begin;
         $schedule->end = $request->end;
         $schedule->student = $request->student;
+        $schedule->active = $request->active == "on" ? true : false;
         $result = $schedule->save();
 
         return $this->showMessage($result);

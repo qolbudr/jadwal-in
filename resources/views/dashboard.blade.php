@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                             <div class="card-body" unstyle="position: relative; overflow:hidden">
-                                <div id="schedule-place" class="row" unstyle="top: 5em; position: relative; box-sizing: border-box; animation: marquee 25s linear infinite;">
+                                <div id="schedule-place" class="row align-items-stretch" unstyle="top: 5em; position: relative; box-sizing: border-box; animation: marquee 25s linear infinite;">
 
                                 </div>
                             </div>
@@ -134,7 +134,15 @@
         responseRoom.forEach((room) => {
             responseSchedule.forEach((schedule) => {
                 if (room.name == schedule.room_name) {
-                    finalResponse.push(schedule)
+                    if(schedule.active == true) {
+                        finalResponse.push(schedule)
+                    } else {
+                        finalResponse.push({
+                            room_name: room.name,
+                            begin: schedule.begin,
+                            end: schedule.end,
+                        })
+                    }
                 }
             })
         })
@@ -161,11 +169,11 @@
 
                 html += `
                 <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="alert ${item.subject_name == null ? 'alert-info' : begin <= nowDate && nowDate <= end ? 'alert-success' : 'alert-secondary'}">
+                    <div class="alert ${item.subject_name == null ? 'alert-info' : begin <= nowDate && nowDate <= end ? 'alert-success' : 'alert-secondary'}" style="height: 93%;">
                         <h3>${item.room_name}</h3>
                         ${ item.subject_name == null ?  
                             `<h5>Ruangan hari ini kosong</h5>
-                            <h5 class="my-2" style="font-weight: normal">&nbsp;</h5>
+                            ${item.begin != null ? `<h5 class="my-2" style="font-weight: normal">${item.begin} - ${item.end}</h5>` : `<h5 class="mt-2" style="font-weight: normal">&nbsp;</h5>`}
                             <h5 class="mt-2" style="font-weight: normal">&nbsp;</h5>
                             ` :
                             `<h5>${item.subject_name}</h5>

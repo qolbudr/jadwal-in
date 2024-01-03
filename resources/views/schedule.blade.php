@@ -88,7 +88,7 @@
 </div>
 
 <div class="modal fade" id="modal-add-schedule" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data</h5>
@@ -163,6 +163,15 @@
                     @else
                     <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
                     @endif
+                    <div class="form-group">
+                        <label>Aktif</label>
+                        <div class="form-check">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox-active-edit" name="active" class="form-check-input" checked="true">
+                                <label for="checkbox-active-edit">Kelas Aktif</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary"
@@ -181,7 +190,7 @@
 </div>
 
 <div class="modal fade" id="modal-edit-schedule" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Edit Data</h5>
@@ -257,6 +266,15 @@
                     @else
                     <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
                     @endif
+                    <div class="form-group">
+                        <label>Aktif</label>
+                        <div class="form-check">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox-active-edit" name="active" class="form-check-input" checked="false">
+                                <label for="checkbox-active-edit">Kelas Aktif</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary"
@@ -290,6 +308,11 @@
         document.querySelector(`#modal-edit-schedule [name=begin]`).value = schedule.begin
         document.querySelector(`#modal-edit-schedule [name=end]`).value = schedule.end
         document.querySelector(`#modal-edit-schedule [name=student]`).value = schedule.student
+        if(schedule.active == 1) {
+            document.querySelector(`#modal-edit-schedule [name=active]`).setAttribute('checked', 'true')
+        } else {
+            document.querySelector(`#modal-edit-schedule [name=active]`).removeAttribute('checked')
+        }
         if(schedule.begin) {
             var myModal = new bootstrap.Modal(document.getElementById('modal-edit-schedule'))
             myModal.show();
